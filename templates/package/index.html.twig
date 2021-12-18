@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des colis{% endblock %}
+
+{% block body %}
+
+   <h1 class="title"><span>Liste des colis</span></h1>
+
+   <br>
+   <a href="{{ path('package_create') }}" class="waves-effect waves-light btn"><i class="material-icons left">add_circle</i>Créer un colis</a>
+   <br><br>
+
+
+    <table class="table bordered">
+        <tr>
+            <td>#</td>
+            <td>Client</td>
+            <td>Expéditeur</td>
+            <td>Status</td>
+            <td>Point relais</td>
+            <td>Casier</td>
+            <td>Poids</td>
+
+        </tr>
+
+        {% for package in packages %}
+            <tr>
+                <td>{{ package.id }}</td>
+                <td>{{ package.customer.name }}</td>
+                <td>{{ package.sender.id }}</td>
+                <td>{{ package.status|join(', ') }}</td>
+                <td>{{ package.hub.adress }}</td>
+                <td>{{ package.locker.id }}</td>
+                <td>{{ package.weight }}</td>
+                <td>
+                    <a href="{{ path('package_edit', {'id': package.id}) }}" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Modifier</a>
+                    <a href="{{ path('package_delete', {'id': package.id, 'token': csrf_token('delete_package')}) }}" class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Supprimer</a>
+                    <a href="{{ path('package_show', {'id': package.id}) }}" class="waves-effect waves-light btn"><i class="material-icons left">remove_red_eye</i>Voir</a>
+
+
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <style>
+  
+    .title {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 35px;
+    }
+    .title span {
+    position: relative;
+    padding: 1em;
+    }
+    .title span:before, .title span:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background: #000;
+    width: 1200px;
+    top: 50%;
+    margin-top: -1px;
+    }
+    .title span:before {
+    right: 100%;
+    }
+    .title span:after {
+    left: 100%;
+    }
+
+    </style>
+{% endblock %}

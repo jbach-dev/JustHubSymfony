@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un livre{% endblock %}
+
+{% block body %}
+   <h1 class="title"><span>Créer un colis</span></h1>
+
+    {{ form_start(form) }}
+        {{ form_rest(form) }}
+
+        <br>
+        <button id="log_btn" class="waves-effect waves-light btn" type="submit">Créer</button>
+        <br><br>
+
+    {{ form_end(form) }}
+
+    <style>
+  
+    .title {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 35px;
+    }
+    .title span {
+    position: relative;
+    padding: 1em;
+    }
+    .title span:before, .title span:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background: #000;
+    width: 1200px;
+    top: 50%;
+    margin-top: -1px;
+    }
+    .title span:before {
+    right: 100%;
+    }
+    .title span:after {
+    left: 100%;
+    }
+
+    #log_btn {
+        font-family: 'Oswald', sans-serif;
+        text-align: center;
+        width: 300px;
+        font-size: 18px;
+        text-transform: lowercase;
+        text-transform: capitalize;
+    }
+
+    </style>
+{% endblock %}

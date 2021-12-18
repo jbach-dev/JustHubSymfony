@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon super site{% endblock %}
+
+{% block body %}
+    {% if app.user == null %}
+    <h1 class="title"><span>Bienvenue !</span></h1>
+
+
+    
+    {% elseif app.user.roles == ["ROLE_SENDER"] %}
+    <h1 class="title"><span>Page d'accueil - Sender</span></h1>
+    <a href="{{ path('package_index') }}" class="waves-effect waves-light btn"><i class="material-icons left">featured_play_list</i>Liste des colis</a>
+    <a href="{{ path('package_create') }}" class="waves-effect waves-light btn"><i class="material-icons left">featured_play_list</i>Créer un colis</a>
+
+    {% elseif app.user.roles == ["ROLE_SENDER","ROLE_HUB"] %}
+
+    <h1 class="title"><span>Merci de créer un compte avec seulement un rôle !</span></h1>
+
+
+    {% else %} 
+    <h1 class="title"><span>Page d'accueil - Hub</span></h1>
+
+
+    <a href="{{ path('package_indexHub') }}" class="waves-effect waves-light btn"><i class="material-icons left">featured_play_list</i>Liste des colis</a>
+
+    {% endif %}
+    <style>
+  
+    .title {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 35px;
+    }
+    .title span {
+    position: relative;
+    padding: 1em;
+    }
+    .title span:before, .title span:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    background: #000;
+    width: 1200px;
+    top: 50%;
+    margin-top: -1px;
+    }
+    .title span:before {
+    right: 100%;
+    }
+    .title span:after {
+    left: 100%;
+    }
+
+    {# #log_btn {
+        font-family: 'Oswald', sans-serif;
+        text-align: center;
+        width: 200px;
+        font-size: 18px;
+        text-transform: lowercase;
+        text-transform: capitalize;
+    } #}
+    </style>
+
+
+
+    {# <a href="{{ path('security_login') }}">Se connecter</a> #}
+
+{% endblock %}
+
+
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"> 
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    {% block stylesheets %}
+        
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% endblock %}
+</head>
+<body>
+
+
+    <nav class="#b2dfdb teal lighten-4">
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo"><img width="150" src="http://josephine-bach.com/logo_api/Amazon_Hub.png"></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if app.user %}
+                <li><a id="btn_black" href="http://localhost/logout">Se déconnecter</a></li>
+            {% else %} 
+                <li><a id="btn_black" href="http://localhost/register">S'inscrire</a></li>
+                <li><a id="btn_black" href="http://localhost/login">Se connecter</a></li>
+            {% endif %}
+                
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+
+    <style>
+    #btn_black{
+        color: #000;
+    }
+    </style>
+
+    <script>
+        {% for type, messages in app.flashes() %}
+            {% for message in messages %}
+                M.toast({html: '{{ message }}', classes: '{{ type }}'});
+            {% endfor %}
+        {% endfor %}
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+    </script>
+</body>
+</html>
